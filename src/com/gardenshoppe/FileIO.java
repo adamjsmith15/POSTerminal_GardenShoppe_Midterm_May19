@@ -1,5 +1,4 @@
 package com.gardenshoppe;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,13 +13,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
+
 public class FileIO {
 	Scanner sc =  new Scanner(System.in);
-
+	String fileName = "src/com/gardenshoppe/itemList.txt";
 	//creat itemList file
-	public void creatAFile() {
-		String fileName = "itemList.txt";
-		Path path = Paths.get("src", fileName);
+	public void creatAFile(String fileName) {
+		
+		Path path = Paths.get(fileName);
 		if (Files.notExists(path)) {
 			try {
 				Files.createFile(path);
@@ -34,10 +34,10 @@ public class FileIO {
 
 		}
 	}
-	
+	//write all products to the file(store owner use only)
 	public void writeToAFile() {
 		Product p = null;
-		String fileName = "src/itemList.txt";
+		String fileName = "src/com/gardenshoppe/itemList.txt";
 		Path path = Paths.get(fileName);
 
 		File file = path.toFile();
@@ -48,7 +48,7 @@ public class FileIO {
 			String countinue = "y";
 			while (countinue.equalsIgnoreCase("y")) {
 				p = new Product(Validator.getString(sc, "Enter the product name: "),
-								Validator.getString(sc, "Enter the item catagory : "), 
+								Validator.getString(sc, "Enter the item catagory: "), //bugs
 								Validator.getString(sc, "Enter the description: "),
 								Validator.getDouble(sc, "Enter product price: "));
 				output.println(p.getName() + "," + p.getCategory() + ", "
@@ -61,11 +61,38 @@ public class FileIO {
 			output.close();
 	}
 	}
+	
+	//write the file with user items in their chart(including create a chartFile and display the list)
+	public void writeChartToAFile(ArrayList<Product> list) {
+		Product p = null;
+		String fileName = "src/chartList.txt";
+		creatAFile(fileName); 
+		Path path = Paths.get(fileName);
 
-	public void readFromFile() {
+		File file = path.toFile();
+		PrintWriter output = null;
+		try {
+			output = new PrintWriter(new FileOutputStream(file, false));
+			for(int i = 0; i < list.size(); i++) {
+				output.println(list.get(i));
+			}
+			
+			for(Product pp: list) {
+				System.out.println(pp);
+			}
+			
+			readFromFile(fileName);
+		} catch (FileNotFoundException e) {
+			System.out.println("Yoooo, I don't know what's going on -- contact someone!");
+		} finally {
+			output.close();
+	}
+	}
+
+	public void readFromFile(String fileName) {
 		ArrayList<Product> Plist = new ArrayList<>();
-		String file = "src/itemList.txt";
-		Path filePath = Paths.get(file);
+		
+		Path filePath = Paths.get(fileName);
 
 		File f = filePath.toFile();
 		BufferedReader br = null;
@@ -74,7 +101,6 @@ public class FileIO {
 			String line = br.readLine();
 
 			while (line != null) {
-//				System.out.println(line);
 				String[] arr = line.split(",");
 				Plist.add(new Product(arr[0], arr[1], arr[2], Double.parseDouble(arr[3])));
 				line = br.readLine();
@@ -88,8 +114,8 @@ public class FileIO {
 			System.out.println("Something crazy happened -- call someone who can help!");
 
 		}
-		for(Product pl : Plist) {
-			System.out.println(pl);
+		for(int i = 0; i < Plist.size(); i++ ) {	
+			System.out.println((i+1 + " " + Plist.get(i)));
 		}
 	}
 }
