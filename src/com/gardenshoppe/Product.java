@@ -3,7 +3,7 @@ package com.gardenshoppe;
 public class Product {
 
 	private String name;
-	// private String category;
+	private String category;
 	private String description;
 	private double price;
 
@@ -14,7 +14,7 @@ public class Product {
 	public Product(String name, String category, String description, double price) {
 
 		this.name = name;
-		// this.category = category;
+		this.category = category;
 		this.description = description;
 		this.price = price;
 	}
@@ -27,12 +27,12 @@ public class Product {
 		this.name = name;
 	}
 
-	// public String getCategory() {
-	// return category;
-	// }
-	// public void setCategory(String category) {
-	// this.category = category;
-	// }
+	 public String getCategory() {
+	 return category;
+	 }
+	 public void setCategory(String category) {
+	 this.category = category;
+	 }
 	public String getDescription() {
 		return description;
 	}
@@ -55,8 +55,8 @@ public class Product {
 
 	@Override
 	public String toString() {
-		String format = "%-10s %-10s %-10s $%-10,.2f";
-		return String.format(format, name, category, description, price);
+		String format = "%-10s %-10s %-10s $%-10.2f";
+		return String.format(format, name, category, description, price);//fix me
 	}
 
 }
