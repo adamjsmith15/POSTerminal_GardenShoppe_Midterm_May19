@@ -17,11 +17,11 @@ import java.util.Scanner;
 
 public class FileIO {
 	Scanner sc =  new Scanner(System.in);
-	String fileName = "itemList.txt";
+	String fileName = "src/com/gardenshoppe/itemList.txt";
 	//creat itemList file
 	public void creatAFile(String fileName) {
 		
-		Path path = Paths.get("src", fileName);
+		Path path = Paths.get(fileName);
 		if (Files.notExists(path)) {
 			try {
 				Files.createFile(path);
@@ -38,7 +38,7 @@ public class FileIO {
 	//write all products to the file(store owner use only)
 	public void writeToAFile() {
 		Product p = null;
-		String fileName = "src/itemList.txt";
+		String fileName = "src/com/gardenshoppe/itemList.txt";
 		Path path = Paths.get(fileName);
 
 		File file = path.toFile();
@@ -66,7 +66,7 @@ public class FileIO {
 	//write the file with user items in their chart(including create a chartFile and display the list)
 	public void writeChartToAFile(ArrayList<Product> list) {
 		Product p = null;
-		String fileName = "chartList.txt";
+		String fileName = "src/chartList.txt";
 		creatAFile(fileName); 
 		Path path = Paths.get(fileName);
 
