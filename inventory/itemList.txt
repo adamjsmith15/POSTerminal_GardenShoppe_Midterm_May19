@@ -1,26 +1,26 @@
 Jalapeno Pepper,starterPlant,talk to owner,2.5
-Squash-Zucchini,starterPlant,talk to owner,2.5
+SquashZucchini,starterPlant,talk to owner,2.5
 Bell pepper,starterPlant,talk to owner,2.5
 Tomato,starterPlant,talk to owner,2.5
 Cucumber,starterPlant,talk to owner,2.5
 Green Beans,starterPlant,talk to owner,2.5
 Jalapeno Pepper s,seed,Just a send,0.5
-Squash-Zucchini s,seed,Just a send,0.5
+SquashZucchini s,seed,Just a send,0.5
 Bell pepper s,seed,Just a send,0.5
 Tomato s,seed,Just a send,0.5
 Cucumber s,seed,Just a send,0.5
 Green Beans s,seed,Just a send,0.5
 Seed Starting Tray,Tray,Just a tray,3.50
-3’ by 5’ by 1’ Raised Bed,Tray,Just a tray,15.95
-5’ by 8’ by 1’ Raised Bed,Tray,Just a tray,22.95
-8” Barrel,Tray,Just a tray,10.55
-16” Barrel,Tray,Just a tray,9.99
+3x5x1 Raised Bed,Tray,Just a tray,15.95
+5x8x1 Raised Bed,Tray,Just a tray,22.95
+8in Barrel,Tray,Just a tray,10.55
+16in Barrel,Tray,Just a tray,9.99
 Earth Box Gardening Kit,Tool,Just a kit,32.95
 shovel,tool,Just a tool,12.95
 Hose,tool,Just a tool,24.99
 Hoe,tool,Just a tool,8.75
 Tiller,tool,Just a tool,32.95
-Gloves,tool,Just a tool,$5.95
+Gloves,tool,Just a tool,5.95
 Scarecrow,decor,Decor is decor,10.95
 Wind Chime,decor,Decor is decor,32.99
 Trellis,decor,Decor is decor,25.00

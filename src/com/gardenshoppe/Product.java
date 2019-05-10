@@ -51,12 +51,14 @@ public class Product {
 	}
 
 	public void printMenu() {
+		// TODO should have a formated title for items price descriptions and category
+		// TODO this should probably take in a list and the print sysout that list
 
 	}
 
 	@Override
 	public String toString() {
-		String format = "%-10s %-10s %-10s $%-10,.2f";
+		String format = "%-10s %-10s %-10s $%,-10.2f";
 		return String.format(format, name, cat, description, price);
 	}
 

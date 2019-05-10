@@ -76,6 +76,7 @@ public class Shopper {
 	}
 	@Override
 	public String toString() {
+		// TODO this should look like the to string from poroduct
 		return "Shopper item=" + item + ", priceInCart=" + priceInCart + ", quantity=" + quantity + ", finalTax="
 				+ finalTax;
 	}

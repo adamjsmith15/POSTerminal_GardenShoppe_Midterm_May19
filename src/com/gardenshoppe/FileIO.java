@@ -18,7 +18,7 @@ public class FileIO {
 	Scanner sc =  new Scanner(System.in);
 	String fileName = "src/com/gardenshoppe/itemList.txt";
 	//creat itemList file
-	public void creatAFile(String fileName) {
+	public static void creatAFile(String fileName) {
 		
 		Path path = Paths.get(fileName);
 		if (Files.notExists(path)) {
@@ -35,7 +35,7 @@ public class FileIO {
 		}
 	}
 	//write all products to the file(store owner use only)
-	public void writeToAFile() {
+	public static void writeToAFile(Scanner sc) {
 		Product p = null;
 		String fileName = "src/com/gardenshoppe/itemList.txt";
 		Path path = Paths.get(fileName);
@@ -63,7 +63,7 @@ public class FileIO {
 	}
 	
 	//write the file with user items in their chart(including create a chartFile and display the list)
-	public void writeChartToAFile(ArrayList<Product> list) {
+	public static void writeChartToAFile(ArrayList<Product> list) {
 		Product p = null;
 		String fileName = "src/chartList.txt";
 		creatAFile(fileName); 
@@ -89,20 +89,21 @@ public class FileIO {
 	}
 	}
 
-	public void readFromFile(String fileName) {
-		ArrayList<Product> Plist = new ArrayList<>();
+	public static ArrayList<Product> readFromFile(String fileName) {
+		ArrayList<Product> productList = new ArrayList<>();
 		
-		Path filePath = Paths.get(fileName);
+		Path filePath = Paths.get("inventory",fileName);
 
 		File f = filePath.toFile();
-		BufferedReader br = null;
 		try {
-			br = new BufferedReader(new FileReader(f));
+			BufferedReader br = new BufferedReader(new FileReader(f));
 			String line = br.readLine();
 
 			while (line != null) {
 				String[] arr = line.split(",");
-				Plist.add(new Product(arr[0], arr[1], arr[2], Double.parseDouble(arr[3])));
+				// TODO need to either make category a string and not search by it or add conditional logic
+				// to determine what category and assign it to arr[1]
+				productList.add(new Product(arr[0], arr[1], arr[2], Double.parseDouble(arr[3])));
 				line = br.readLine();
 			}
 			br.close();
@@ -114,8 +115,28 @@ public class FileIO {
 			System.out.println("Something crazy happened -- call someone who can help!");
 
 		}
-		for(int i = 0; i < Plist.size(); i++ ) {	
-			System.out.println((i+1 + " " + Plist.get(i)));
+//		for(int i = 0; i < productList.size(); i++ ) {	
+//			System.out.println((i+1 + " " + productList.get(i)));
+//		}
+		return productList;
+	}
+	
+	public static void createDir(String path) {
+		String dirPath = path;
+
+		Path folder = Paths.get(dirPath);
+
+		if (Files.notExists(folder)) {
+			try {
+				Files.createDirectories(folder);
+				System.out.println("Folder was created successfully");
+			} catch (IOException e) {
+				System.out.println("I don't know");
+			}
+		} else {
+			System.out.println("Folder already exists.");
 		}
 	}
+
 }
+
