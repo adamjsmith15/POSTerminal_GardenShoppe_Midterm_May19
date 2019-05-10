@@ -195,5 +195,18 @@ public class Validator {
 		}
 		return date;
 	}
+	
+	public static String creditCardValidator(Scanner sc, String prompt) {
+		boolean isValid = false;
+		String creditCard = "";
+		while(!isValid) {
+			System.out.print(prompt);
+	        String creditCardNumberPattern = "((?:(?:\\d{4}[- ]){3}\\d{4}|\\d{16}))(?![\\d])";
+	        Pattern pattern = Pattern.compile(creditCardNumberPattern, Pattern.CASE_INSENSITIVE);
+	        Matcher matcher = pattern.matcher(creditCard);
+	        isValid = matcher.matches();
+	    }
+		return creditCard;
+	}
 
 }

@@ -8,6 +8,7 @@ public class Product {
 	private String category;
 	private String description;
 	private double price;
+	private int quantity;
 
 	public Product() {
 
@@ -19,6 +20,23 @@ public class Product {
 		this.category = category;
 		this.description = description;
 		this.price = price;
+	}
+	public Product(String name, String category, String description, double price, int quantity) {
+
+		this.name = name;
+		this.category = category;
+		this.description = description;
+		this.price = price;
+		this.quantity = quantity;
+	}
+	
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public String getName() {

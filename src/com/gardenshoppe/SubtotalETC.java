@@ -17,12 +17,14 @@ import java.util.Collection;
 	
 		
 		
-		public static BigDecimal calculateSalesTax(SubtotalETC e) {
+		public static BigDecimal calculateGrandTotal(SubtotalETC e) {
 	        BigDecimal b = new BigDecimal(e.getSubTotal());
-	        BigDecimal c = new BigDecimal((1-e.getSalesTax()));
+	        BigDecimal c = new BigDecimal((e.getSalesTax()));
 	        
-	        e.setGrandTotal(b.multiply(c));
-	        return b.multiply(c);
+	        BigDecimal total = b.add(b.multiply(c));
+	        e.setGrandTotal(total);
+	        System.out.printf("Your total today is $%.2f \n", total);
+	        return total;
 	    }
 		
 		public static double subTotal(ArrayList<Product> cart, SubtotalETC e) {
@@ -33,18 +35,58 @@ import java.util.Collection;
 			e.setSubTotal(sum);
 			return sum;
 		}
+		public void getPaymentMethod(Scanner sc, BigDecimal tot) {
+			System.out.println("How would you like to pay for this?");
+			System.out.println("1.  Cash");
+			System.out.println("2.  Credit");
+			System.out.println("3.  Check");
+			int userEntry = Validator.getInt(sc, "", 1, 3);
+			if(userEntry == 1) {
+				BigDecimal cash = payWithCash(sc);
+				BigDecimal change = cash.subtract(tot);
+				System.out.printf("Your change is $%.2f \n", change);
+				
+			}else if(userEntry == 2) {
+				payWithCreditCard(sc);
+			}else {
+				payWithCheck(sc);
+			}
+			
+		}
 		
-//		public static double BigDecimal getGrandTotal1() {
-//			
-//			BigDecimal result = test.add(new BigDecimal(0));
-//			System.out.println(result);
-//		}
+		public static BigDecimal payWithCash(Scanner sc) {
+			double cash = Validator.getDouble(sc, "How much cash are we receiving?");
+			BigDecimal money = new BigDecimal(cash);
+			return money;
+		}
 		
-//		public static double grandTotal(ArrayList<Product> cart, SubtotalETC e) {
-//			return grandTotal;
-//		}
+		public static String payWithCreditCard(Scanner sc) {
+			String creditCard = Validator.creditCardValidator(sc, "Please enter your credit card number: ");
+			
+			return creditCard;
+			
+		}
 		
-		public double getPrice() {
+		public static int payWithCheck(Scanner sc) {
+			int checkNumber = Validator.getInt(sc, "Please enter your check nubmer");
+			return checkNumber;
+		}
+		
+		public void printReceipt(ArrayList<Product> list, Product p, SubtotalETC e) {
+	        String format = "%-20s %-20d %.2f \n";
+	        System.out.printf("%-15s %-10s %20s %n", "Item Name", "Item Quantity", "Item Price ");
+	        System.out.println("===========================================================");
+	        for(int i = 0; i < list.size(); i++) {
+	            System.out.printf(format, list.get(i).getName(), list.get(i).getQuantity(), 
+	                    list.get(i).getQuantity()*list.get(i).getPrice());
+	        }
+	        System.out.println("===========================================================");
+	        
+	        System.out.printf("Subtotal: %.2f \n", e.getSubTotal()); //send a Arraylist for that method; it returns a subtotal
+	        System.out.printf("Tax: %.2f \n", e.getSubTotal() * (1 + getSalesTax()));
+	        System.out.printf("Grandtotal: %.2f \n", e.getGrandTotal());
+	    }
+		public  double getPrice() {
 			return price;
 		}
 

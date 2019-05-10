@@ -9,50 +9,46 @@ public class GardenShoppeApp {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		FileIO.createDir("inventory");
 		Shopper customer = new Shopper();
 		Product main = new Product();
-		String keepShopping = "y";
+		SubtotalETC reg = new SubtotalETC();
 		ArrayList<Product> cart = new ArrayList<>();
 		ArrayList<Product> inventory = FileIO.readFromFile("itemList.txt");
 		int userEntry = -1;
-		System.out.println(inventory.get(0));
 
 		// Greet Customer
 		System.out.println("Welcome to The Garden Shoppe!");
 		System.out.println("-----------------------------");
 
-		// Get Customer Name
-				//String name = Validator.getLine(scan, "Please enter your name: ");
-				
-				
-		while (keepShopping.equalsIgnoreCase("y")) {
+		while (userEntry != 5) {
 			//System.out.println(customer.shopCustomer(customer);
 			main.printMenu();
+			System.out.println();
 			userEntry = Validator.getInt(scan, "What would you like to do?", 1, 5);
+			System.out.println();
 			if (userEntry == 1) {
-				// TODO need to get input from user on what they would like to purchase
-				// TODO maybe using the nums on the printMenu when that is finished
-				customer.addToCart(cart, inventory.get(0), 1);
+				main.printInventory(inventory);
+				System.out.println();
+				int userAdd = Validator.getInt(scan, "Select the item number you would like to purchase: ", 1, 27);
+				customer.addToCart(cart, scan, customer, inventory.get(userAdd-1));
 				
 			}else if(userEntry == 2) {
-				// TODO nice to have a sysout title either in the main or in the method idc Item, category, description, price
 				customer.listOfItems(cart);
 			}else if (userEntry == 3) {
 				// TODO should print a modified list of the cart with numbers in front of it 
-				// then get input from user on what they want to delete and pass that in.
-				customer.removeFromCart(cart, inventory.get(0), 1);
+				int userDelete = Validator.getInt(scan, "Select the item number you would like to remove: ", 1, cart.size());
+				customer.removeFromCart(cart, cart.get(userDelete -1));
 			}else if (userEntry == 4) {
-				// TODO check out
-				// needs to get which payment method and then select the appropriate method to calculate payment
-				// and return change 
+				
+				double subT = reg.subTotal(cart, reg);
+				
+				reg.getPaymentMethod(scan, reg.calculateGrandTotal(reg));
+				reg.printReceipt(cart, main, reg);
+				// TODO needs to print receipt
+				break;
 			}else {
 				break;
 			}
-			
-			
-			System.out.print("\nContinue shopping? (y/n): ");
-			keepShopping = scan.next();
 		}
 			
 		//System.out.println("\n" + customer);
