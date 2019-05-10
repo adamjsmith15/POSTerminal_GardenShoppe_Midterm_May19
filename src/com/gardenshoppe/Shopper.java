@@ -10,6 +10,8 @@ public class Shopper {
 	private double priceInCart;
 	private int quantity;
 	private double finalTax;
+	
+	//pooop im m kaing a change i can save now
 		
 	public static void listOfItems(ArrayList<Product> cart){
 		//take in line by line and print what they have in their cart
