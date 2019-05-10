@@ -1,6 +1,7 @@
 package com.gardenshoppe;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Shopper {
@@ -18,11 +19,13 @@ public class Shopper {
 	}
 	
 
-	public void addToCart(ArrayList<Product> cart, Product item, int quantity) {
-	 cart.add(item);
-	 System.out.println("You've entered " + item.getName() + " to your shopping cart at " + item.getPrice());
-	 
-}
+	public void addToCart(ArrayList<Product> cart, Scanner sc, Shopper c , Product item) {
+	    cart.add(item);
+	    c.setQuantity(Validator.getInt(sc, "How many" + item.getName() + " would you like to add? "));
+	    System.out.println("You've entered " + c.getQuantity() + item.getName() + " to your shopping cart at " + item.getPrice());
+	    
+	}
+	
 	public void removeFromCart(ArrayList<Product> cart , Product item, int quantity) {
 		for(int i = 0; i < cart.size(); i++) {
 		cart.indexOf(item);
@@ -76,8 +79,7 @@ public class Shopper {
 	}
 	@Override
 	public String toString() {
-		// TODO this should look like the to string from poroduct
-		return "Shopper item=" + item + ", priceInCart=" + priceInCart + ", quantity=" + quantity + ", finalTax="
-				+ finalTax;
+		String format = "%-10s %-10d %-10d $%,-10.2f";
+		return String.format(format, item, priceInCart, quantity, finalTax);
 	}
 }
