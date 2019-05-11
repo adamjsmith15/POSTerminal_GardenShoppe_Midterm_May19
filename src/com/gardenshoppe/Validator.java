@@ -197,16 +197,58 @@ public class Validator {
 	}
 	
 	public static String creditCardValidator(Scanner sc, String prompt) {
+		System.out.println(prompt);
 		boolean isValid = false;
 		String creditCard = "";
-		while(!isValid) {
-			System.out.print(prompt);
-	        String creditCardNumberPattern = "((?:(?:\\d{4}[- ]){3}\\d{4}|\\d{16}))(?![\\d])";
-	        Pattern pattern = Pattern.compile(creditCardNumberPattern, Pattern.CASE_INSENSITIVE);
-	        Matcher matcher = pattern.matcher(creditCard);
-	        isValid = matcher.matches();
-	    }
+		//do not know why it doesn't work
+//		while(!isValid) {
+//			System.out.print(prompt);
+//	        String creditCardNumberPattern = "((?:(?:\\d{4}[- ]){3}\\d{4}|\\d{16}))(?![\\d])";
+//	        Pattern pattern = Pattern.compile(creditCardNumberPattern, Pattern.CASE_INSENSITIVE);
+//	        Matcher matcher = pattern.matcher(creditCard);
+//	        isValid = matcher.matches();
+//	    }
+		do {
+			//one type master cards only. total 16 digits
+			//first digit is always 5, second digit is 1-5, the left 14 digits are just random digits from 0 to 9
+			if (sc.hasNextLine() && sc.nextLine().matches("^5[1-5][0-9]{14}")) {
+				isValid = true;
+			} else {
+				System.out.println("Input must match the right format: ");
+			}
+
+		} while (!isValid);
 		return creditCard;
+	}
+	
+	public static String getCreditCardExpiration(Scanner sc, String prompt) {
+		System.out.println(prompt);
+		boolean isValid = false;
+		String cCExpiration = "";
+		do {//ex: 02/22
+			if (sc.hasNextLine() && sc.nextLine().matches("(?:0[1-9]|1[0-3])/[0-9]{2}")) {
+				isValid = true;
+			} else {
+				System.out.println("Input must match the right format: ");
+			}
+
+		} while (!isValid);
+		return cCExpiration;
+	}
+	
+	public static String getCVV(Scanner sc, String prompt) {
+		System.out.println(prompt);
+		boolean isValid = false;
+		String cVV = "";
+		do {//ex: 254
+			if (sc.hasNextLine() && sc.nextLine().matches("([0-9]{3})")) {
+				isValid = true;
+			} else {
+				System.out.println("Input must match the right format: ");
+			}
+
+		} while (!isValid);
+		return cVV;	
 	}
 
 }

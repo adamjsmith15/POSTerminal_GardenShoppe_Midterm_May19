@@ -12,30 +12,13 @@ import java.util.Collection;
 		
 		private double price; 
 		private double salesTax = 0.06; 
-		private double subTotal;
+		private double subTotal = 0;
 		private BigDecimal grandTotal;
 	
 		
-		
-		public static BigDecimal calculateGrandTotal(SubtotalETC e) {
-	        BigDecimal b = new BigDecimal(e.getSubTotal());
-	        BigDecimal c = new BigDecimal((e.getSalesTax()));
-	        
-	        BigDecimal total = b.add(b.multiply(c));
-	        e.setGrandTotal(total);
-	        System.out.printf("Your total today is $%.2f \n", total);
-	        return total;
-	    }
-		
-		public static double subTotal(ArrayList<Product> cart, SubtotalETC e) {
-			double sum = 0;
-			for (int i = 0; i<cart.size(); i++) {
-				sum += e.getSubTotal() + (cart.get(i).getPrice() * cart.get(i).getQuantity());
-						}
-			e.setSubTotal(sum);
-			return sum;
-		}
-		public void getPaymentMethod(Scanner sc, BigDecimal tot) {
+		public void getPaymentMethod(ArrayList<Product> cart, Scanner sc, SubtotalETC e) {
+			calcSubTotal(cart, e);
+	        System.out.println("Your grand total today is: " + calcGrandTotal(e));
 			System.out.println("How would you like to pay for this?");
 			System.out.println("1.  Cash");
 			System.out.println("2.  Credit");
@@ -43,16 +26,42 @@ import java.util.Collection;
 			int userEntry = Validator.getInt(sc, "", 1, 3);
 			if(userEntry == 1) {
 				BigDecimal cash = payWithCash(sc);
-				BigDecimal change = cash.subtract(tot);
-				System.out.printf("Your change is $%.2f \n", change);
+				BigDecimal change = cash.subtract(calcGrandTotal(e));
+				System.out.println("Your change is " + change);
 				
 			}else if(userEntry == 2) {
 				payWithCreditCard(sc);
 			}else {
-				payWithCheck(sc);
+				payWithCheck(sc); 
 			}
 			
 		}
+		
+		public void calcSubTotal(ArrayList<Product> cart, SubtotalETC e) {
+			double sum = 0;
+			for (int i = 0; i<cart.size(); i++) {
+				sum += cart.get(i).getPrice()*cart.get(i).getQuantity();
+			}
+			e.setSubTotal(sum);
+			System.out.println("Your sub total today is:" + e.getSubTotal());
+		}
+		
+//		public BigDecimal calTax(SubtotalETC e) {// I give up this one 
+////			double t = e.getSalesTax();
+//			BigDecimal taxRate = new BigDecimal(e.getSalesTax());
+//			BigDecimal sales = new BigDecimal(e.getSubTotal());
+//			BigDecimal tax = taxRate.multiply(sales);
+//			return tax;
+//		}
+		public BigDecimal calcGrandTotal(SubtotalETC e) {//TODO: something wrong here.
+			double sales = e.getSubTotal();
+			double tax = e.getSalesTax();
+	        BigDecimal b = new BigDecimal(Double.toString(sales));
+	        BigDecimal c = new BigDecimal(Double.toString(tax));
+	        
+	        BigDecimal grandT = b.multiply(c).add(b);
+			return grandT;
+	    }
 		
 		public static BigDecimal payWithCash(Scanner sc) {
 			double cash = Validator.getDouble(sc, "How much cash are we receiving?");
@@ -62,9 +71,9 @@ import java.util.Collection;
 		
 		public static String payWithCreditCard(Scanner sc) {
 			String creditCard = Validator.creditCardValidator(sc, "Please enter your credit card number: ");
-			
-			return creditCard;
-			
+			String expiration = Validator.getCreditCardExpiration(sc, "Enter credit card expiration date:");
+			String cVV = Validator.getCVV(sc, "Enter CVV number:");
+			return creditCard + "\n" + expiration + "\n" + cVV;
 		}
 		
 		public static int payWithCheck(Scanner sc) {
@@ -74,6 +83,8 @@ import java.util.Collection;
 		
 		public void printReceipt(ArrayList<Product> list, Product p, SubtotalETC e) {
 	        String format = "%-20s %-20d %.2f \n";
+	        System.out.println();
+	        System.out.println("Below is your receipt: ");
 	        System.out.printf("%-15s %-10s %20s %n", "Item Name", "Item Quantity", "Item Price ");
 	        System.out.println("===========================================================");
 	        for(int i = 0; i < list.size(); i++) {
@@ -82,9 +93,9 @@ import java.util.Collection;
 	        }
 	        System.out.println("===========================================================");
 	        
-	        System.out.printf("Subtotal: %.2f \n", e.getSubTotal()); //send a Arraylist for that method; it returns a subtotal
-	        System.out.printf("Tax: %.2f \n", e.getSubTotal() * (e.getSalesTax());
-	        System.out.printf("Grandtotal: %.2f \n", e.getGrandTotal());
+	        System.out.println("Subtotal: " + getSubTotal()); //send a Arraylist for that method; it returns a subtotal
+	        System.out.printf("Tax: %.2f %n", getSubTotal() * e.getSalesTax());
+	        System.out.println("Grand total: " + calcGrandTotal(e));//because this one used BigDecimal class, so it has 3 decimal
 	    }
 		public  double getPrice() {
 			return price;
