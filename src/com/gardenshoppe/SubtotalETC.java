@@ -83,7 +83,7 @@ import java.util.Collection;
 	        System.out.println("===========================================================");
 	        
 	        System.out.printf("Subtotal: %.2f \n", e.getSubTotal()); //send a Arraylist for that method; it returns a subtotal
-	        System.out.printf("Tax: %.2f \n", e.getSubTotal() * (1 + getSalesTax()));
+	        System.out.printf("Tax: %.2f \n", e.getSubTotal() * (e.getSalesTax());
 	        System.out.printf("Grandtotal: %.2f \n", e.getGrandTotal());
 	    }
 		public  double getPrice() {
