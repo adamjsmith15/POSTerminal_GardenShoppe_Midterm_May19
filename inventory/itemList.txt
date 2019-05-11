@@ -4,7 +4,7 @@ Bell pepper,Plant,Starter,2.5
 Tomato,Plant,Starter,2.5
 Cucumber,Plant,Starter,2.5
 Green Beans,Plant,Starter,2.5
-Jalapeno Peppers,seed, Packet,0.5
+Jalapeno Peppers,seed,Packet,0.5
 SquashZucchinis,seed,Packet,0.5
 Bell peppers,seed,Packet,0.5
 Tomatoes,seed,Packet,0.5
@@ -22,6 +22,6 @@ Hoe,Tool,Fiberglass,8.75
 Tiller,Tool,Fiberglass,32.95
 Gloves,Tool,Fiberglass,5.95
 Scarecrow,Decor,Handmade,10.95
-Wind Chime,Decor,Recycled,32.99
+Wind Chime,Decor,Recycled Metal,32.99
 Trellis,Decor,Cedar,25.00
 Plant Markers,Decor,(10 pack),8.99
