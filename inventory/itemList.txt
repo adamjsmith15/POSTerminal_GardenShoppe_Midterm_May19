@@ -4,12 +4,12 @@ Bell pepper,Plant,Starter,2.5
 Tomato,Plant,Starter,2.5
 Cucumber,Plant,Starter,2.5
 Green Beans,Plant,Starter,2.5
-Jalapeno Peppers,seed,Packet,0.5
-SquashZucchinis,seed,Packet,0.5
-Bell peppers,seed,Packet,0.5
-Tomatoes,seed,Packet,0.5
-Cucumbers,seed,Packet,0.5
-Green Beans s,seed,Packet,0.5
+Jalapeno Peppers,Seed,Packet,0.5
+SquashZucchinis,Seed,Packet,0.5
+Bell peppers,Seed,Packet,0.5
+Tomatoes,Seed,Packet,0.5
+Cucumbers,Seed,Packet,0.5
+Green Beans,Seed,Packet,0.5
 Seed Starting Tray,Tray,Plastic,3.50
 3x5x1 Raised Bed,Box,Wood,15.95
 5x8x1 Raised Bed,Box,Wood,22.95
