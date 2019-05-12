@@ -10,25 +10,28 @@ public class Shopper {
 	private int quantity;
 	private double finalTax;
 
-	public void addToCart(ArrayList<Product> cart, Scanner sc, Shopper c, ArrayList<Product> inv, Product P) {
+	public void addToCart(ArrayList<Product> cart, Scanner sc, Shopper c, ArrayList<Product> inv, Product p) {
+		// TODO: we need to create a method that allow user to add items that have
+		// already in the cart. so we just need to
+		// increase the quatity instead of display that same item in the list for twice
 		String continueAdd = "y";
-		while(continueAdd.equals("y")) {
-			P.printInventory(inv);//display inventory here
+		while (continueAdd.equals("y")) {
+			p.printInventory(inv);// display inventory here
 			System.out.println();
 			int userAdd = Validator.getInt(sc, "Select the item number you would like to purchase: ", 1, 27);
-			//used the instance variable of quantity in shopper class
-			int num = Validator.getInt(sc, "How many " + inv.get(userAdd -1).getName() + " would you like to add? ");
+			// used the instance variable of quantity in shopper class
+			int num = Validator.getInt(sc, "How many " + inv.get(userAdd - 1).getName() + " would you like to add? ");
 			setQuantity(num);
-			cart.add(new Product(inv.get(userAdd -1).getName(),inv.get(userAdd -1).getCategory(), getQuantity(),
-					inv.get(userAdd -1).getPrice()));
-			System.out.println("You've entered " + getQuantity() + " " + inv.get(userAdd -1).getName() + " to your shopping cart at "
-					+ inv.get(userAdd -1).getPrice()+ " each.");
+			// add to cart list
+			cart.add(new Product(inv.get(userAdd - 1).getName(), inv.get(userAdd - 1).getCategory(), getQuantity(),
+					inv.get(userAdd - 1).getPrice()));
+			System.out.println("You've entered " + getQuantity() + " " + inv.get(userAdd - 1).getName()
+					+ " to your shopping cart at " + inv.get(userAdd - 1).getPrice() + " each.");
 			continueAdd = Validator.getStringMatchingRegex(sc, "Add more items?(y/n)", "[yYnN]+");
-			}
+		}
 	}
 
 	public void listOfItems(ArrayList<Product> cart) {
-		// take in line by line and print what they have in their cart
 		System.out.printf("   %-19s %-21s %-19s $%s\n", "Item", "Category", "Quantity", "Price");
 		System.out.println("=========================================================================");
 		if (!cart.isEmpty()) {
@@ -37,10 +40,12 @@ public class Shopper {
 						cart.get(i).getCategory(), cart.get(i).getQuantity(),
 						cart.get(i).getPrice() * cart.get(i).getQuantity());
 			}
-			System.out.println("=========================================================================");
+			System.out.println("=========================================================================");// just for
+																											// looking
 		} else {
 			System.out.println("Cart is empty!");
-			System.out.println("=========================================================================");
+			System.out.println("=========================================================================");// just for
+																											// looking
 		}
 		System.out.println();
 
@@ -63,15 +68,17 @@ public class Shopper {
 									+ cart.get(userDelete - 1).getName() + "s in your cart.");
 							// take in user input
 							int num = Validator.getInt(sc, "How many would you like to remove?");
-							// reset the quantity for that perticular item according to how many user wants to keep in the cart
+							// reset the quantity for that perticular item according to how many user wants
+							// to keep in the cart
 							cart.get(userDelete - 1).setQuantity((cart.get(userDelete - 1).getQuantity()) - num);
 							break;
 						} else {
-}
-							cart.remove(userDelete - 1);
-						break;
 						}
+						// if there is only one item in the cart:
+						cart.remove(userDelete - 1);
+						break;
 					}
+				}
 				System.out.println("cart has been updated");
 			} else {
 				System.out.println("Cart is empty!");
