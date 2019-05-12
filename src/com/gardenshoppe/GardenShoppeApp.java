@@ -11,6 +11,7 @@ public class GardenShoppeApp {
 		Product main = new Product();
 		SubtotalETC reg = new SubtotalETC();
 		
+		//Suggestion(LM): use Linkedlist since this program invoves more auddition and deletion 
 		ArrayList<Product> cart = new ArrayList<>();
 		ArrayList<Product> inventory = FileIO.readFromFile("itemList.txt");
 		
