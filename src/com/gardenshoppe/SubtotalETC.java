@@ -53,16 +53,16 @@ public class SubtotalETC {
 		return money;
 	}
 
-	public static String payWithCreditCard(Scanner sc) {
+	public static void payWithCreditCard(Scanner sc) {
 		String creditCard = Validator.creditCardValidator(sc, "Please enter your credit card number: ");
 		String expiration = Validator.getCreditCardExpiration(sc, "Enter credit card expiration date:");
 		String cVV = Validator.getCVV(sc, "Enter CVV number:");
-		return creditCard + "\n" + expiration + "\n" + cVV;
+		return creditCard + "\n" + expiration + "\n" + cVV;//TODO: we can display credit card number on the receipt(optional)
 	}
 
 	public static int payWithCheck(Scanner sc) {
 		int checkNumber = Validator.getInt(sc, "Please enter your check nubmer");
-		return checkNumber;
+		return checkNumber; //TODO: we can display check# on the receipt(optionla)
 	}
 
 	public void printReceipt(ArrayList<Product> list, Product p, SubtotalETC e) {
