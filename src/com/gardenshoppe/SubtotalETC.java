@@ -8,7 +8,7 @@ public class SubtotalETC {
 
 	private double price;
 	private double salesTax = 0.06;
-	private double subTotal = 0;
+	private double subTotal;
 	private BigDecimal grandTotal;
 
 	public void getPaymentMethod(ArrayList<Product> cart, Scanner sc, SubtotalETC e) {
