@@ -13,7 +13,7 @@ public class SubtotalETC {
 
 	public void getPaymentMethod(ArrayList<Product> cart, Scanner sc, SubtotalETC e) {
 		calcSubTotal(cart, e);
-		System.out.println("Your grand total today is: " + calcGrandTotal(e));
+		System.out.printf("Your grand total today is: %.2f %n", calcGrandTotal(e));
 		System.out.println("How would you like to pay for this?\n1.  Cash \n2.  Credit \n3.  Check\n");
 		int userEntry = Validator.getInt(sc, "", 1, 3);
 		if (userEntry == 1) {
@@ -35,7 +35,7 @@ public class SubtotalETC {
 			sum += cart.get(i).getPrice() * cart.get(i).getQuantity();
 		}
 		e.setSubTotal(sum);
-		System.out.printf("Your sub total today is: $%.2f", e.getSubTotal());
+		System.out.printf("Your sub total today is: $%.2f %n", e.getSubTotal());
 	}
 
 	public BigDecimal calcGrandTotal(SubtotalETC e) {
