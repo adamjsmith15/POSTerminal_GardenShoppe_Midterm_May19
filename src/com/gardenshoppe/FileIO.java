@@ -115,9 +115,6 @@ public class FileIO {
 			System.out.println("Something crazy happened -- call someone who can help!");
 
 		}
-//		for(int i = 0; i < productList.size(); i++ ) {	
-//			System.out.println((i+1 + " " + productList.get(i)));
-//		}
 		return productList;
 	}
 	
