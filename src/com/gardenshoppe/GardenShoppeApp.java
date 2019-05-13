@@ -35,6 +35,7 @@ public class GardenShoppeApp {
 			case 4:
 				reg.getPaymentMethod(cart, scan, reg);
 				reg.printReceipt(cart, main, reg);
+				userEntry = 5;
 				break;
 			case 5:
 				System.out.print("Goodbye!");
