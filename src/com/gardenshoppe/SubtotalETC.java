@@ -35,7 +35,7 @@ public class SubtotalETC {
 			sum += cart.get(i).getPrice() * cart.get(i).getQuantity();
 		}
 		e.setSubTotal(sum);
-		System.out.println("Your sub total today is:" + e.getSubTotal());
+		System.out.printf("Your sub total today is: $%.2f", e.getSubTotal());
 	}
 
 	public BigDecimal calcGrandTotal(SubtotalETC e) {
@@ -52,18 +52,20 @@ public class SubtotalETC {
 		BigDecimal money = new BigDecimal(cash);
 		return money;
 	}
-
+    //master card only with 16 digits
 	public static String payWithCreditCard(Scanner sc) {
+		//card number: start with 5, the second number is between 1-5, and the last 14 digits are random numbers
 		String creditCard = Validator.creditCardValidator(sc, "Please enter your credit card number: ");
+		// ex: 07/01
 		String expiration = Validator.getCreditCardExpiration(sc, "Enter credit card expiration date:");
+		//random 3 numbers
 		String cVV = Validator.getCVV(sc, "Enter CVV number:");
-		return creditCard + "\n" + expiration + "\n" + cVV;// TODO: we can display credit card number on the
-															// receipt(optional)
+		return creditCard + "\n" + expiration + "\n" + cVV;//TODO: we can display credit card number on the receipt(optional)
 	}
 
 	public static int payWithCheck(Scanner sc) {
 		int checkNumber = Validator.getInt(sc, "Please enter your check nubmer");
-		return checkNumber; // TODO: we can display check# on the receipt(optionla)
+		return checkNumber; //TODO: we can display check# on the receipt(optionla)
 	}
 
 	public void printReceipt(ArrayList<Product> list, Product p, SubtotalETC e) {
@@ -78,9 +80,9 @@ public class SubtotalETC {
 		}
 		System.out.println("===========================================================");
 
-		System.out.println("Subtotal: " + getSubTotal());
-		System.out.printf("Tax: %.2f %n", getSubTotal() * e.getSalesTax());
-		System.out.println("Grand total: " + calcGrandTotal(e));// because this one used BigDecimal class, so it has 3
+		System.out.printf("Subtotal: $%.2f %n", getSubTotal());
+		System.out.printf("Tax: $%.2f %n", getSubTotal() * e.getSalesTax());
+		System.out.printf("Grand total: $%.2f",calcGrandTotal(e));// because this one used BigDecimal class, so it has 3
 																// decimal
 	}
 
